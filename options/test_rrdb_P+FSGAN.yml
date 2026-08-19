@@ -1,0 +1,43 @@
+# Overall settings
+name: test_RRDB_P+SeD
+model_type: RRDB
+stage: test
+manual_seed: 1
+ckpt_path: '/home/haida/d_j/Semantic-Aware-Low-Light-Image-Enhancement-main/DRBN_SKF/src/result_4_9/train_RRDB_P+SeD/model_7000.pt'
+
+# Model hyperparams
+model:
+  rrdb:
+    in_nc: 3
+    out_nc: 3
+  swinir:
+    img_size: 64
+    in_chans: 3
+    embed_dim: 180
+    depths: [6, 6, 6, 6, 6, 6]
+    num_heads: [6, 6, 6, 6, 6, 6]
+    window_size: 8
+    mlp_ratio: 2.
+    upscale: 4
+    img_range: 1.
+    upsampler: 'pixelshuffle'
+    resi_connection: '1conv'
+
+dataloader:
+  test:
+    batch_size: 1
+    num_workers: 1
+    pin_memory: True
+
+# Testing
+#test:
+#  data_lr_root: '/home/haida/d_j/SeD-main/Evaluation/test/Set14/image_SRF_4/LR'
+#  use_hr: True
+#
+#  data_hr_root: '/home/haida/d_j/SeD-main/Evaluation/test/Set14/image_SRF_4/LR'
+test:
+  data_lr_root: '/home/haida/d_j/SeD-WGSR-LPIPS/codes/Evaluation/test/Set14/image_SRF_4/LR'
+#  data_lr_root: '/home/haida/d_j/SeD-WGSR-LPIPS/codes/Evaluation/test/DIV2K_valid_LR_bicubic/X4'
+  use_hr: True
+  data_hr_root: '/home/haida/d_j/SeD-WGSR-LPIPS/codes/Evaluation/test/Set14/image_SRF_4/HR'
+
